@@ -18,8 +18,13 @@ export class TodoChartComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.addTask(form.value)
+    let newTask: Todo = form.value;
+    this.addTask(newTask);
     form.resetForm();
+  }
+
+  onComplete(){
+    
   }
 
   public getTasks(): void {
@@ -31,7 +36,7 @@ export class TodoChartComponent implements OnInit {
     );
   }
 
-  public addTask(form: NgForm): void {
-    this.todoService.addTask(form.value).subscribe();
+  public addTask(newTask: Todo): void {
+    this.todoService.addTask(newTask).subscribe();
   }
 }
