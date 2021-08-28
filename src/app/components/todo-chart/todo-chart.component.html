@@ -13,17 +13,41 @@
     </div>
   </form>
   <ul class="todo-list">
-    <li *ngFor="let task of tasks">
-      <div>
-        <div>{{ task.task }}</div>
+    <li *ngFor="let todo of tasks">
+      <div *ngIf="!this.todo.isDone">
+        <div class="titleDiv">{{ todo.task }}</div>
         <div>
-          <button (click)="onComplete()" class="btn-floating waves-effect waves-light green">
+          <button
+            (click)="onComplete(this.todo)"
+            class="btn-floating waves-effect waves-light green"
+          >
             <i class="material-icons">check</i>
           </button>
-          <button class="btn-floating waves-effect waves-light red">
+          <button
+            (click)="onDelete(this.todo)"
+            class="btn-floating waves-effect waves-light red"
+          >
             <i class="material-icons">delete</i>
           </button>
         </div>
+      </div>
+    </li>
+    <br />
+    <br />
+    <h5 class="completed_tasks">Completed Tasks</h5>
+
+    <br />
+    <br />
+
+    <li *ngFor="let todo of tasks">
+      <div *ngIf="this.todo.isDone">
+        <div class="titleDiv">{{ this.todo.task }}</div>
+        <button
+          (click)="onDelete(this.todo)"
+          class="btn-floating waves-effect waves-light red"
+        >
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </li>
   </ul>

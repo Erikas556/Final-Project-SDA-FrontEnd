@@ -23,8 +23,12 @@ export class TodoChartComponent implements OnInit {
     form.resetForm();
   }
 
-  onComplete(){
-    
+  onComplete(task: Todo) {
+    this.taskComplete(task, task.id);
+  }
+
+  onDelete(task: Todo) {
+    this.deleteTask(task.id);
   }
 
   public getTasks(): void {
@@ -38,5 +42,14 @@ export class TodoChartComponent implements OnInit {
 
   public addTask(newTask: Todo): void {
     this.todoService.addTask(newTask).subscribe();
+    this.tasks.push(newTask);
+  }
+
+  public taskComplete(task: Todo, id: number): void {
+    this.todoService.completeTask(task, id).subscribe();
+  }
+
+  public deleteTask(id: number): void {
+    this.todoService.deleteTask(id).subscribe();
   }
 }
