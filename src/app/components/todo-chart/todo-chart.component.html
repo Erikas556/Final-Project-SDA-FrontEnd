@@ -1,54 +1,60 @@
-<div class="container">
-  <h1>To Do List</h1>
-  <form class="todo-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <input type="text" id="title" name="task" ngModel />
+<app-navbar></app-navbar>
+<body>
+  <div class="image">
+    <div class="container">
+      <h1>Tasks</h1>
+      <form class="todo-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <input type="text" id="title" name="task" ngModel />
 
-    <div>
-      <button
-        type="submit"
-        class="btn-floating waves-effect waves-light yellow"
-      >
-        <i class="material-icons">add</i>
-      </button>
-    </div>
-  </form>
-  <ul class="todo-list">
-    <li *ngFor="let todo of tasks">
-      <div *ngIf="!this.todo.isDone">
-        <div class="titleDiv">{{ todo.task }}</div>
         <div>
           <button
-            (click)="onComplete(this.todo)"
-            class="btn-floating waves-effect waves-light green"
+            type="submit"
+            class="btn-floating waves-effect waves-light yellow"
           >
-            <i class="material-icons">check</i>
-          </button>
-          <button
-            (click)="onDelete(this.todo)"
-            class="btn-floating waves-effect waves-light red"
-          >
-            <i class="material-icons">delete</i>
+            <i class="material-icons">add</i>
           </button>
         </div>
-      </div>
-    </li>
-    <br />
-    <br />
-    <h5 class="completed_tasks">Completed Tasks</h5>
+      </form>
+      <ul class="todo-list">
+        <li *ngFor="let todo of tasks">
+          <div *ngIf="!todo.isDone">
+            <div class="titleDiv">{{ todo.task }}</div>
+            <div>
+              <button
+                (click)="onComplete(todo)"
+                class="btn-floating waves-effect waves-light green"
+              >
+                <i class="material-icons">check</i>
+              </button>
+              <button
+                (click)="onDelete(todo)"
+                class="btn-floating waves-effect waves-light red"
+              >
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </div>
+        </li>
+        <br />
+        <br />
+        <h5 class="completed_tasks">Completed Tasks</h5>
 
-    <br />
-    <br />
+        <br />
+        <br />
 
-    <li *ngFor="let todo of tasks">
-      <div *ngIf="this.todo.isDone">
-        <div class="titleDiv">{{ this.todo.task }}</div>
-        <button
-          (click)="onDelete(this.todo)"
-          class="btn-floating waves-effect waves-light red"
-        >
-          <i class="material-icons">delete</i>
-        </button>
-      </div>
-    </li>
-  </ul>
-</div>
+        <li *ngFor="let todo of completedTasks">
+          <div>
+            <div class="titleDiv">{{ todo.task }}</div>
+            <button
+              (click)="onDelete(todo)"
+              class="btn-floating waves-effect waves-light red"
+            >
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</body>

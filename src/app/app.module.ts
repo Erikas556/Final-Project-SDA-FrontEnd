@@ -1,16 +1,34 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { AboutComponent } from './components/about/about.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TodoChartComponent } from './components/todo-chart/todo-chart.component';
 import { TodoService } from './service/todo.service';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, TodoChartComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    TodoChartComponent,
+    AboutComponent,
+    PageNotFoundComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: 'about', component: AboutComponent },
+      { path: 'home', component: TodoChartComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {path: '**', component: PageNotFoundComponent},
+    ]),
+  ],
   providers: [TodoService],
   bootstrap: [AppComponent],
 })

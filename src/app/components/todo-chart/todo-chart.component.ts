@@ -10,7 +10,8 @@ import { TodoService } from 'src/app/service/todo.service';
   styleUrls: ['./todo-chart.component.css'],
 })
 export class TodoChartComponent implements OnInit {
-  public tasks: Todo[];
+  public tasks: Todo[] = [];
+  public completedTasks: Todo[] = [];
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
@@ -18,9 +19,13 @@ export class TodoChartComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    let newTask: Todo = form.value;
-    this.addTask(newTask);
-    form.resetForm();
+    if (form.untouched) {
+      alert('No task entered !');
+    } else {
+      let newTask: Todo = form.value;
+      this.addTask(newTask);
+      form.resetForm();
+    }
   }
 
   onComplete(task: Todo) {
@@ -28,28 +33,43 @@ export class TodoChartComponent implements OnInit {
   }
 
   onDelete(task: Todo) {
-    this.deleteTask(task.id);
-  }
-
-  public getTasks(): void {
-    this.todoService.getTasks().subscribe(
-      (response: Todo[]) => {
-        this.tasks = response;
+    this.todoService.deleteTask(task.id).subscribe(
+      (response: any) => {
+        const idx = this.tasks.indexOf(task);
+        task.isDone
+          ? this.completedTasks.splice(idx, 1)
+          : this.tasks.splice(idx, 1);
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
   }
 
-  public addTask(newTask: Todo): void {
-    this.todoService.addTask(newTask).subscribe();
-    this.tasks.push(newTask);
+  getTasks(): void {
+    this.todoService.getTasks().subscribe(
+      (response: Todo[]) => {
+        response.forEach((task) => {
+          task.isDone ? this.completedTasks.push(task) : this.tasks.push(task);
+        });
+      },
+      (error: HttpErrorResponse) => alert(error.message)
+    );
   }
 
-  public taskComplete(task: Todo, id: number): void {
-    this.todoService.completeTask(task, id).subscribe();
+  addTask(newTask: Todo): void {
+      this.todoService.addTask(newTask).subscribe(
+        (response: Todo) => this.tasks.push(response), 
+        (error: HttpErrorResponse) => alert(error.message)
+      );
   }
 
-  public deleteTask(id: number): void {
-    this.todoService.deleteTask(id).subscribe();
+  taskComplete(task: Todo, id: number): void {
+    this.todoService.completeTask(task, id).subscribe(
+      (response: Todo) => {
+        this.completedTasks.push(response);
+        const idx = this.tasks.indexOf(task);
+        idx !== -1 ? this.tasks.splice(idx, 1) : alert('Task not found');
+      },
+      (error: HttpErrorResponse) => alert(error.message)
+    );
   }
 }
