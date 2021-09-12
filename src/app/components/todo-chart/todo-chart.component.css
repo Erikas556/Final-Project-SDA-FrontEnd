@@ -5,7 +5,7 @@
 
 .image {
   width: 100%;
-  height: 890px;
+  height: 1000px;
   background-image: url("https://coolwallpapers.me/picsup/3084721-blank_chalks_coloured-pencil_desk_draw_empty_pad_paper_pencil_post_sheet_table_wood_wooden_wooden-surface.jpg");
   background-size: cover;
 }
@@ -40,13 +40,19 @@ h1 {
   color: #333;
   margin-bottom: 100px;
   margin-top: 0px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
+
 
 .completed_tasks {
   text-align: left;
   color: rgb(0, 0, 0);
   font-size: 35px;
+}
+
+h5 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
 }
 
 

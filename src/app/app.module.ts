@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TodoChartComponent } from './components/todo-chart/todo-chart.component';
 import { TodoService } from './service/todo.service';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TodoService } from './service/todo.service';
     TodoChartComponent,
     AboutComponent,
     PageNotFoundComponent,
+    FooterComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +29,7 @@ import { TodoService } from './service/todo.service';
     RouterModule.forRoot([
       { path: 'about', component: AboutComponent },
       { path: 'home', component: TodoChartComponent },
+      {path: 'contact', component: ContactComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {path: '**', component: PageNotFoundComponent},
     ]),
