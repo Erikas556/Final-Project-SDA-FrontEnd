@@ -4,6 +4,9 @@
 .google_link {
   color: crimson;
 }
+.facebook_link {
+    color: darkblue;
+}
 
 .social_links li {
   display: inline-block;
@@ -25,7 +28,7 @@
 }
 
 .twitter_link{
-color: rgb(21, 195, 218);
+color: rgb(0, 222, 252);
 }
 
 .paragraph {
